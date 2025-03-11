@@ -1,0 +1,55 @@
+.wrapper {
+  min-height: 100vh;
+  background-color: #000;
+  color: #adbdff;
+}
+
+.slogan {
+  position: relative;
+  background: url("./assets/tyre.jpg") center center no-repeat;
+  background-size: cover;
+  background-position: center;
+  color: rgb(238, 228, 228);
+  border-radius: 10px;
+}
+.slogan::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Adjust opacity for darkness */
+  border-radius: 10px;
+  z-index: 0;
+}
+
+.slogan * {
+  position: relative;
+  z-index: 1; /* Ensures text remains above the overlay */
+}
+.slogan img {
+  max-width: 100%;
+  /* max-height: 30vh; Prevents overflowing beyond viewport */
+  height: auto;
+  aspect-ratio: 16 / 9; /* Adjust to your desired ratio */
+  object-fit: cover; /* Ensures the whole image fits */
+
+  max-height: 300px;
+}
+/* .signup-container {
+  min-height: 80vh;
+} */
+
+.default-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.main {
+  margin-top: -30px;
+  min-height: 80vh;
+  flex-grow: 1; /* Allows main to take up available space */
+
+  /* Add spacing inside main */
+}
