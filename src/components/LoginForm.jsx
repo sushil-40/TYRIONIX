@@ -1,32 +1,65 @@
-import React from "react";
-import { Container, Form, Button, Row, Col } from "react-bootstrap";
+import React, { useState } from "react";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import { CustomInput } from "./CustomInput";
+import useForm from "../hooks/useForm";
+
+const initialState = {
+  email: "",
+  password: "",
+};
 export const LoginForm = () => {
+  const { form, setForm, handleOnChange } = useForm({ initialState });
+
+  // const [form, setForm] = useState({});
+  const fields = [
+    {
+      label: "Email",
+      placeholder: "John@email.com",
+      required: true,
+      type: "email",
+      name: "email",
+      value: form.email,
+    },
+
+    {
+      label: "Password",
+      placeholder: "********",
+      required: true,
+      type: "password",
+      name: "password",
+      value: form.password,
+    },
+  ];
+  // const handleOnChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setForm({ ...form, [name]: value });
+  // };
+  const handleOnSubmit = (e) => {
+    e.preventDefault();
+    console.log(form);
+  };
   return (
-    <Container
-      fluid
-      className="vh-100 d-flex align-items-center justify-content-center"
-    >
-      <Row className="w-100">
-        <Col className="mx-auto">
-          <Form className="p-4 border rounded shadow">
-            <h2 className="text-center mb-4">Login</h2>
+    <div className="border rounded p-5">
+      <h4 className="mb-1">Sign In now!</h4>
+      <hr />
+      <Form onSubmit={handleOnSubmit}>
+        {fields.map((input) => {
+          return (
+            <CustomInput
+              key={input.name}
+              {...input}
+              onChange={handleOnChange}
+            />
+          );
+        })}
 
-            <Form.Group controlId="formEmail" className="mb-3">
-              <Form.Label>Email address</Form.Label>
-              <Form.Control type="email" placeholder="Enter email" />
-            </Form.Group>
-
-            <Form.Group controlId="formPassword" className="mb-3">
-              <Form.Label>Password</Form.Label>
-              <Form.Control type="password" placeholder="Password" />
-            </Form.Group>
-
-            <Button variant="primary" type="submit" className="w-100">
-              Submit
-            </Button>
-          </Form>
-        </Col>
-      </Row>
-    </Container>
+        <div className="d-grid pt-1">
+          <Button variant="primary" type="submit">
+            Submit
+          </Button>
+        </div>
+      </Form>
+    </div>
   );
 };

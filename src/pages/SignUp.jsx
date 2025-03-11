@@ -9,7 +9,7 @@ const SignUp = () => {
   return (
     <Container className="p-5 signup-container">
       <Row className="bg-dark  p-2 rounded">
-        <Col className="slogan">
+        <Col className="slogan" md={6}>
           <Slogan />
         </Col>
         <Col>
