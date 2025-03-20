@@ -61,7 +61,7 @@ export const LoginForm = () => {
     setUser(user); // user from pendingResp
 
     localStorage.setItem("accessJWT", accessJWT);
-    localStorage.setItem("userInfo", JSON.stringify(user));
+    // localStorage.setItem("userInfo", JSON.stringify(user));
   };
   return (
     <div className="border rounded p-5">
