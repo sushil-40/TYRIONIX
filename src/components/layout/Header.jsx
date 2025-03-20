@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { IoLogOutSharp } from "react-icons/io5";
 import { HiOutlineLogin } from "react-icons/hi";
 import { FaFilePen } from "react-icons/fa6";
+import { MdDashboardCustomize } from "react-icons/md";
 export const Header = () => {
   return (
     <Navbar expand="lg" variant="dark" className="bg-body-dark">
@@ -13,15 +14,18 @@ export const Header = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
-            <Link className="nav-link" to="/signup">
+            <Nav.Link as={Link} to="/signup">
               <FaFilePen /> Sign Up
-            </Link>
-            <Link className="nav-link" to="/">
+            </Nav.Link>
+            <Nav.Link as={Link} to="/">
               <HiOutlineLogin /> Login
-            </Link>
-            <Link className="nav-link" to="/">
+            </Nav.Link>
+            <Nav.Link as={Link} to="/dashboard">
+              <MdDashboardCustomize /> Dashboard
+            </Nav.Link>
+            <Nav.Link as={Link} to="/">
               <IoLogOutSharp /> Logout
-            </Link>
+            </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

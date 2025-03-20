@@ -6,6 +6,8 @@ import { Routes, Route } from "react-router-dom";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import { DefaultLayout } from "./components/layout/DefaultLayout";
+import Dashboard from "./pages/Dashboard";
+import { Auth } from "./auth/Auth";
 
 function App() {
   return (
@@ -14,9 +16,16 @@ function App() {
         <Route path="/" element={<DefaultLayout />}>
           <Route index element={<Login />} />
           <Route path="signup" element={<SignUp />} />
+
+          <Route
+            path="dashboard"
+            element={
+              <Auth>
+                <Dashboard />
+              </Auth>
+            }
+          />
         </Route>
-        {/* <Route index element={<Home />} />
-      <Route path="about" element={<About />} /> */}
       </Routes>
       <ToastContainer />
     </div>

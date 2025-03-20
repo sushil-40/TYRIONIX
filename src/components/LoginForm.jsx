@@ -1,16 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { CustomInput } from "./CustomInput";
-import useForm from "../hooks/useForm";
+import useForm from "../hooks/useForm.js";
+import { userLogin } from "../../helpers/axiosHelper";
+import { toast } from "react-toastify";
+import { useUser } from "../context/UserContext";
+import { useNavigate } from "react-router-dom";
 
 const initialState = {
   email: "",
   password: "",
 };
 export const LoginForm = () => {
-  const { form, setForm, handleOnChange } = useForm({ initialState });
+  //Consume ContextAPI
+  const { user, setUser } = useUser();
 
+  const { form, handleOnChange } = useForm({ initialState });
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    user?._id && navigate("/dashboard");
+  }, [user?._id, navigate]);
   // const [form, setForm] = useState({});
   const fields = [
     {
@@ -35,9 +46,22 @@ export const LoginForm = () => {
   //   const { name, value } = e.target;
   //   setForm({ ...form, [name]: value });
   // };
-  const handleOnSubmit = (e) => {
+  const handleOnSubmit = async (e) => {
     e.preventDefault();
     console.log(form);
+
+    const pendingResp = userLogin(form);
+    toast.promise(pendingResp, {
+      pending: "Please wait........!",
+    });
+
+    const { status, message, user, accessJWT } = await pendingResp;
+    toast[status](message);
+    console.log(user, accessJWT);
+    setUser(user); // user from pendingResp
+
+    localStorage.setItem("accessJWT", accessJWT);
+    localStorage.setItem("userInfo", JSON.stringify(user));
   };
   return (
     <div className="border rounded p-5">
